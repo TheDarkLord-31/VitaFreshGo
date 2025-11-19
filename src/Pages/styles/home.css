@@ -1,0 +1,123 @@
+:root{
+  --hp-green: #16a34a; /* зелено като логото */
+  --hp-lime:  #22c55e;
+  --hp-amber: #f59e0b; /* жълто-оранжево */
+  --hp-yellow:#facc15;
+  --hp-text:  #0f172a;
+  --hp-muted: #475569;
+  --hp-border:#e5e7eb;
+}
+
+/* страница – секции по цялата ширина */
+.hp-page{ display:flex; flex-direction:column; gap:0; }
+
+/* ------------------- HERO ------------------- */
+.hp-hero{
+  width:100%;
+  background:
+    radial-gradient(60% 40% at 90% 0%, rgba(250,204,21,.18), transparent 60%),
+    linear-gradient(180deg, rgba(34,197,94,.16), rgba(250,204,21,.12));
+  padding: clamp(20px, 4vw, 48px);
+  margin-top: 50px;
+  border-bottom:1px solid #eef2f6;
+}
+
+.hp-hero-card{
+  width:100%;
+  display:flex; gap:16px; align-items:flex-start;
+  background:#ffffff;
+  border:1px solid var(--hp-border);
+  border-radius:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  padding:16px;
+}
+
+.hp-logo{
+  width:72px; height:72px; object-fit:contain;
+  border-radius:14px; background:#f8fafc; border:1px solid #eef2f7; flex:0 0 auto;
+}
+.hp-hero-text{ flex:1 1 auto; }
+.hp-hero-title{ margin:2px 0 6px; font-size:28px; font-weight:900; color:var(--hp-text); }
+.hp-hero-text p{ margin:6px 0; color:var(--hp-muted); }
+
+/* ------------------- BANDS (full width) ------------------- */
+.hp-band{
+  width:100%;
+  padding: clamp(18px, 3.5vw, 36px) clamp(12px, 3vw, 28px);
+}
+
+.hp-band--recipes{
+  background:
+    linear-gradient(180deg, rgba(34,197,94,.08), rgba(34,197,94,.03));
+}
+.hp-band--plans{
+  background:
+    linear-gradient(180deg, rgba(250,204,21,.12), rgba(250,204,21,.04));
+}
+
+.hp-band-head{
+  max-width:none; /* по желание можеш да ограничиш */
+  margin-bottom:12px;
+}
+.hp-band-head h2{
+  margin:0 0 6px;
+  font-size:22px; font-weight:900; color:var(--hp-text);
+}
+.hp-band-head p{ margin:0; color:var(--hp-muted); }
+
+/* GRID за карти – растяга се по ширината */
+.hp-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:12px;
+  margin-top:12px;
+}
+
+.hp-card{
+  background:#fff; border:1px solid var(--hp-border); border-radius:12px; overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,.05);
+  display:flex; flex-direction:column;
+}
+.hp-card-img{ width:100%; height:160px; object-fit:cover; background:#f3f4f6; }
+.hp-card-body{ padding:12px; display:flex; flex-direction:column; gap:4px; }
+.hp-card-title{ margin:0; font-size:16px; font-weight:800; color:var(--hp-text); }
+.hp-meta{ margin:0; color:#64748b; font-size:14px; }
+
+.hp-link{ color:#166534; font-weight:800; text-decoration:none; }
+.hp-link:hover{ text-decoration:underline; }
+
+/* CTA ред (долу в секцията) */
+.hp-band-cta{
+  margin-top:12px;
+  display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;
+}
+.hp-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:40px; padding:0 16px;
+  border-radius:10px; font-weight:800; border:1px solid transparent;
+  text-decoration:none; cursor:pointer;
+  transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+}
+.hp-btn-dark{
+  background: linear-gradient(180deg, var(--hp-green), #15803d);
+  color:#fff; box-shadow:0 4px 14px rgba(22,163,74,.28);
+}
+.hp-btn-dark:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(22,163,74,.32); }
+
+
+.hp-views {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.hp-card:hover .hp-views {
+  color: #007700;
+}
+
+/* responsive */
+@media (max-width: 680px){
+  .hp-hero-card{ flex-direction:column; align-items:center; text-align:center; }
+}

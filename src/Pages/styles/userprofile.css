@@ -1,0 +1,233 @@
+/* =========================
+   Layout
+========================= */
+.up-layout {
+  display: flex;
+  justify-content: flex-start;   /* картата да е вляво */
+  padding: 70px 20px;
+}
+
+/* само на по-тесни екрани да се центрира */
+@media (max-width: 1300px) {
+  .up-layout { justify-content: center; }
+}
+
+/* =========================
+   Карта
+========================= */
+.up-card {
+  width: 90%;
+  max-width: 900px;
+  background: whitesmoke;
+  border-radius: 10px;
+  box-shadow: 0 0 12px 0.5px silver, inset 0 0 40px 20px whitesmoke;
+  padding: 40px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+/* По подразбиране НЯМА hover. Ако искаш hover само при редакция,
+   сложи клас up-editing на родителя: <main class="up-layout up-editing"> */
+.up-editing .up-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   Заглавие
+========================= */
+.up-head { text-align: center; margin-bottom: 20px; }
+
+.up-head h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00a1d6;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.up-head p { color: #555; font-weight: 500; margin-bottom: 15px; }
+
+/* леко повдига емоджито (шрифтовете се различават) */
+.up-emoji{
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  font-size: 1.3em;     /* по-живо, може и 1.1em */
+  position: relative;
+  top: -7px;            /* ако още е ниско, пробвай -2px */
+}
+
+
+/* =========================
+   Форма
+========================= */
+.up-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.up-info label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;                /* еднакво отстояние за всички контроли */
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Базов стил за input/select */
+.up-info input,
+.up-info select {
+  width: 100%;
+  height: 43px;            /* еднаква височина */
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #fff;
+  color: #333;
+  box-sizing: border-box;
+  margin: 0;               /* няма собствен margin, ползваме gap на label */
+}
+
+/* Фокус само когато НЕ са disabled */
+.up-info input:not(:disabled):focus,
+.up-info select:not(:disabled):focus {
+  outline: none;
+  border-color: #2b8a3e;
+  box-shadow: 0 0 5px rgba(43,138,62,0.25);
+}
+
+/* Disabled (когато не е натиснат "Редактирай") */
+.up-info input:disabled,
+.up-info select:disabled {
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* Ако ползваш native <select>, унифицирай стрелката */
+.up-info select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%232b8a3e' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5' stroke='%232b8a3e' stroke-width='2' stroke-linecap='round' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 35px;
+}
+
+/* =========================
+   NiceSelect (ако го ползваш за "Пол")
+========================= */
+.up-info label .ns { width: 100%; } /* контейнерът на компонента */
+
+.up-info label .ns .ns-button {
+  height: 43px;
+  padding: 10px 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 10px;
+  background: #fff !important;
+  color: #333;
+  font-size: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Фокус само когато е активен */
+.up-info .ns .ns-button:focus,
+.up-info .ns .ns-button.active {
+  border-color: #2b8a3e !important;
+  box-shadow: 0 0 5px rgba(43,138,62,0.25);
+}
+
+/* Неактивен — без hover/клик */
+.ns[aria-disabled="true"] .ns-button,
+.up-info .ns .ns-button[disabled],
+.up-info .ns .ns-button.disabled {
+  background: #fff !important;
+  border: 1px solid #ddd !important;
+  color: #555;
+  pointer-events: none;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+/* Падащ списък */
+.up-info .ns .ns-list {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 6px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.up-info .ns .ns-option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.up-info .ns .ns-option:hover { background: #b3fff0; }
+
+.up-info .ns .ns-option.is-selected {
+  background: #2b8a3e;
+  color: #fff;
+}
+
+/* =========================
+   Действия
+========================= */
+.up-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.up-actions button {
+  background: #2b8a3e;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+
+.up-actions button:hover { background: #257232; }
+
+.up-actions button:nth-child(2) {
+  background: #c21300;
+}
+.up-actions button:nth-child(2):hover { background: darkred; }
+
+/* =========================
+   Mobile
+========================= */
+@media (max-width: 1300px) {
+  .up-layout { padding: 70px 5px; }
+  .up-card { width: 100%; padding: 20px; }
+  .up-head h1 { font-size: 1.4rem; }
+  .up-info { grid-template-columns: 1fr; }
+  .up-actions button { width: 100%; }
+  .up-emoji { top: -5px; }
+}
+
+@media (max-width: 600px) and (orientation: portrait){
+  .up-emoji{ top: 0; }
+}
+@media (max-width: 1300px) and (orientation: landscape){
+  .up-emoji{ top: 0; }
+}

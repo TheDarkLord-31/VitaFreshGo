@@ -1,0 +1,235 @@
+/* ---------- Заглавие ---------- */
+.page-title{
+  text-align: center;
+  margin: 14px 0 10px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Кутия с филтри ---------- */
+.plan-filters{
+  width: min(1200px, 84vw);
+  margin: 10px auto 18px;
+  padding: 16px;
+  background:
+    radial-gradient(1200px 120px at 50% 0%, #ffffffcc, #ffffff00),
+    linear-gradient(180deg, #f7fbff 0%, #f3f7ff 100%);
+  border: 1px solid #e6effc;
+  border-radius: 18px;
+  box-shadow: 0 14px 36px -24px rgba(16, 24, 40, .25);
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "title title"
+    "label chips";
+  column-gap: 12px;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.filters-title{
+  grid-area: title;
+  margin: 0;
+  text-align: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: #111;
+}
+
+.filters-label{
+  grid-area: label;
+  font-weight: 800;
+  color: #111;
+  white-space: nowrap;
+  padding-left: 4px;
+}
+
+.filters-chips{
+  grid-area: chips;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Чипове */
+.chip{
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+  border: 2px solid #e6e6eb;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.chip:hover{ transform: translateY(-1px); border-color:#d8d8df; }
+.chip.is-active{ box-shadow: 0 10px 26px -22px rgba(16,24,40,.25); }
+.chip-clear{ background:#f7f7fa; border-color:#e6e6eb; }
+
+/* Цветен фон на чиповете според категорията (визуално подсказване) */
+.chip[data-cat="Имунитет"]   { background:#DDFBE7; border-color:#BBF2D3; }
+.chip[data-cat="Енергия"]    { background:#FFF3C6; border-color:#FFE093; }
+.chip[data-cat="Отслабване"] { background:#D9F5FF; border-color:#BCEBFF; }
+.chip[data-cat="Протеин"]    { background:#EAE6FF; border-color:#D7CFFF; }
+.chip[data-cat="Антистрес"]  { background:#FFE2EE; border-color:#FFC9E5; }
+
+/* Мобилно поведение за кутията */
+@media (max-width: 820px){
+  .plan-filters{
+    width: min(1100px, 92vw);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "label"
+      "chips";
+    row-gap: 8px;
+    justify-items: center;
+  }
+  .filters-label{ justify-self: start; }
+  .filters-chips{ justify-content: center; }
+}
+
+/* ---------- Зона с планове ---------- */
+.plan-grid{
+  width: min(1200px, 84vw);
+  margin: 14px auto 40px;
+  display: grid;
+  grid-template-columns: repeat(2, calc((100% - 4%) / 2));
+  column-gap: 4%;
+  row-gap: 18px;
+}
+@media (max-width: 820px){
+  .plan-grid{
+    width: min(1100px, 92vw);
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+}
+
+.empty-state{
+  width: min(1200px, 84vw);
+  margin: 4px auto 40px;
+  text-align: center;
+  color: #475569;
+  font-weight: 600;
+}
+
+/* ---------- Карта на план ---------- */
+.plan-card{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "head"
+    "body"
+    "notes"
+    "btn";
+  gap: 10px;
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  border: 1px solid #ececf1;
+  box-shadow: 0 14px 36px -20px rgba(17,17,17,.20);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  min-height: 116px;
+}
+.plan-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 22px 52px -26px rgba(17,17,17,.28);
+  border-color: #e3e3ea;
+}
+
+/* Head секция + тонка акцентна линия */
+.plan-card-head{
+  grid-area: head;
+  position: relative;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+}
+.plan-card-head::after{
+  content:""; position:absolute; left:12px; right:12px; bottom:8px;
+  height: 2px; border-radius: 2px; background: #e9e9ef; /* ще се преоцветява от класовете по-долу */
+}
+
+/* Текстове */
+.plan-name{
+  margin:0; font-size: 20px; font-weight: 800; color:#111; letter-spacing:-0.01em;
+  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.plan-action{ grid-area: body; margin:0; color:#111; font-weight:600; font-size:15px; }
+.plan-notes{ grid-area: notes; margin:0; color:#3f4a59; font-size:13.5px; }
+.plan-action + .plan-notes{ border-top:1px dashed #e6e7ee; padding-top:8px; margin-top:6px; }
+
+/* Бадж (само той е цветен) */
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:5px 12px;
+  border-radius: 999px;
+  font-size:12px; font-weight:800; line-height:1;
+  color:#111;
+  background:#eef2ff; border:1px solid #e4e7ff;
+}
+
+/* Бутон под текста */
+.plan-card-footer{ grid-area: btn; display:flex; }
+.btn-view-plan{
+  width:100%; display:inline-flex; justify-content:center; align-items:center;
+  padding:12px 16px; border-radius: 12px;
+  font-weight: 900; letter-spacing:.02em; text-decoration:none;
+  color:#111; background:#fff; border:2px solid #e6e6eb;
+  box-shadow: 0 12px 28px -22px rgba(17,17,17,.25);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.btn-view-plan:hover{ transform: translateY(-2px); border-color:#d8d8df; }
+.btn-view-plan:active{ transform: translateY(0); }
+.btn-view-plan:focus-visible{ outline:3px solid #93c5fd; outline-offset:2px; }
+
+/* ---------- Оцветяване по категория (клас върху .plan-card) ---------- */
+/* Имунитет */
+.plan-card.cat--imunitet  .badge{ background:#DDFBE7; border-color:#BBF2D3; color: green}
+.plan-card.cat--imunitet  .plan-card-head::after{ background: linear-gradient(90deg,#BBF2D3,#DDFBE7); }
+
+/* Енергия */
+.plan-card.cat--energia   .badge{ background:#FFF3C6; border-color:#FFE093; color: darkorange}
+.plan-card.cat--energia   .plan-card-head::after{ background: linear-gradient(90deg,#FFE093,#FFF3C6); }
+
+/* Отслабване */
+.plan-card.cat--otslabvane .badge{ background:#D9F5FF; border-color:#BCEBFF; color: deepskyblue}
+.plan-card.cat--otslabvane .plan-card-head::after{ background: linear-gradient(90deg,#BCEBFF,#D9F5FF); }
+
+/* Протеин */
+.plan-card.cat--protein   .badge{ background:#EAE6FF; border-color:#D7CFFF; color: rebeccapurple}
+.plan-card.cat--protein   .plan-card-head::after{ background: linear-gradient(90deg,#D7CFFF,#EAE6FF); }
+
+/* Антистрес (текстът да е червен за контраст) */
+.plan-card.cat--antistres .badge{ background:#FFE2EE; border-color:#FFC9E5; color: red; }
+.plan-card.cat--antistres .plan-card-head::after{ background: linear-gradient(90deg,#FFC9E5,#FFE2EE); }
+
+/* Дреболии */
+.loading-inline{ text-align:center; margin: 18px auto 24px; }
+@media (prefers-reduced-motion: reduce){
+  .plan-card, .btn-view, .chip{ transition: none !important; }
+}
+
+/* Брояч „Намерени: X“ под филтрите */
+.plans-count{
+  width: min(1200px, 84vw);
+  margin: 6px auto 8px;
+  padding: 8px 12px;
+  text-align: right;
+  font-weight: 800;
+  color: #111;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+@media (max-width: 820px){
+  .plans-count{
+    width: min(1100px, 92vw);
+    text-align: center;
+  }
+}

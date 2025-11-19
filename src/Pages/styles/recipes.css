@@ -1,0 +1,572 @@
+/* ---------------------------
+  ФИЛТРИ — ред над рецептите 
+----------------------------- */
+.info-text {
+  font-size: 1rem;
+  font-weight: 600;
+  font-style: italic;
+  color: deepskyblue;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* Картичка */
+/* 💎 стъклена карта с градиентна рамка */
+/* 🧊 Стъклена карта с азурен оттенък и сива официална рамка */
+.filters-card{
+  width: 80%;
+  margin-inline: auto;
+  padding: 24px;
+  background: repeating-linear-gradient(135deg, #e3e3e3, white, #ededed, white, #e3e3e3);
+  border: 3px solid white;   /* светъл сив бордър */
+  border-radius: 6px;
+  box-shadow: 0 -4px 2px 4px silver, inset 0 -4px 2px 4px silver;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+
+.filters-card:hover{
+  transform: translateY(-1px);
+}
+
+
+
+
+
+
+
+/* Grid: 7 селекта + бутон „Изчисти“ на една линия */
+.filters-grid {
+  display: flex;
+  justify-content: center;   
+  align-items: flex-end;     
+  gap: 50px;                 /* 🟢 по-голямо разстояние между филтрите */
+  flex-wrap: wrap;           /* търсачката пада долу */
+  margin-bottom: 10px;
+}
+
+.filter-field select,
+.filter-field .ns,
+.filter-field .filter-select {
+  width: 180px;              /* 🟢 по-широки селекти */
+  min-width: 180px;
+}
+
+/* 🔍 Търсачката долу */
+.filter-search {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+/* Едно поле */
+.filter-field label{
+  display:block;
+  font-weight:700;
+  font-size:.92rem;
+  color:black;
+  margin:2px 0 6px;
+  text-align:center;          /* заглавията центрирани */
+}
+
+/* Контроли */
+.filter-select,
+.filter-input{
+  width:100%;
+  height: 40px;              /* беше 42px */
+  padding: 0 1.2rem;          /* по-малък вътрешен отстъп */
+  font-size: .9rem;
+  border:1px solid #dfeae0;
+  border-radius:10px;
+  background:#fff;
+  color:#0b1220;
+  outline:none;
+  transition:box-shadow .15s ease, border-color .15s ease;
+}
+.filter-select:focus,
+.filter-input:focus{
+  border: 2px solid forestgreen;
+  box-shadow:0 0 10 2px silver;
+}
+
+
+
+/* ===== NiceSelect (зелен, заоблен, с dropdown) ===== */
+.ns{ position:relative; width:100%; }
+.ns-button{
+  width:100%;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.5rem;
+  padding:0 .75rem;
+  border: 2px solid whitesmoke;
+  border-radius:10px;
+  background:#fff;
+  color:#1f3322;
+  cursor:pointer;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.ns-button:hover,
+.ns-button:focus{
+  border-color:#38c738;
+  box-shadow:0 0 10px 1px silver;
+}
+.ns-caret{ transition:transform .15s ease; color:#2a7f2a; }
+.ns-caret.up{ transform:rotate(180deg); }
+
+.ns-list{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0; right:0;
+  background:#fff;
+  border:1px solid #cfe9cf;
+  border-radius:10px;                  /* << заобля цялото меню */
+  box-shadow:0 12px 22px rgba(0,0,0,.08);
+  padding:6px;
+  max-height:240px;
+  overflow:auto;
+  z-index:50;
+}
+.ns-option{
+  padding:8px 10px;
+  border-radius:8px;                   /* заобля всяка опция */
+  cursor:pointer;
+  transition:background-color .15s ease, color .15s ease;
+}
+.ns-option:hover{
+  background:orange;                  /* зелено при hover */
+  color:#063d06;
+}
+.ns-option.is-selected{
+  background:#38c738;                  /* избраната е ярко зелена */
+  color:#fff;
+}
+
+
+
+
+
+/* Бутон „Изчисти“ – червен, еднаква височина със селектите */
+.filter-actions{
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: center;
+  align-self: end;
+}
+
+.btn-clear{
+  height:42px;
+  padding:0 1rem;
+  font-weight:700;
+  font-size:.9rem;
+  border-radius:10px;
+  color:#fff;
+  background:linear-gradient(180deg,#ff5a5a,#b80000);
+  border:1px solid #d11313;
+  box-shadow:0 2px 6px rgba(224,33,33,.25);
+  cursor:pointer;
+  transition:filter .15s ease, transform .05s ease;
+  margin-top: 8px;          /* малко въздух над бутона */
+}
+
+.btn-clear:hover{ filter:brightness(1.05); }
+.btn-clear:active{ transform:translateY(1px); }
+
+/* Търсачката – по-тясна и центрирана под филтрите */
+/* Търсачката – по-тясна и центрирана под филтрите */
+.filter-search {
+  grid-column: 1 / -1;            /* цял ред */
+  display: flex;
+  justify-content: center;
+  align-items: center;            /* центрира label и input вертикално */
+  gap: 10px;                      /* разстояние между label и input */
+  margin-top: 8px;
+}
+
+.filter-search label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1f3322;
+  margin: 0;                      /* маха вертикалния отстъп */
+}
+
+.filter-search .filter-input {
+  max-width: 520px;
+  height: 42px;
+  text-align: left;
+}
+
+.results-badge{
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 .75rem;
+  margin-left: 20px;
+  border: none;
+  background: none;
+  color: black;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  white-space: nowrap;       /* да не пренася текста */
+}
+
+/* Резюме на резултатите */
+.filters-summary{
+  margin:10px 2px 8px;
+  color:#2a3a2a;
+  font-size:.95rem;
+  text-align: center;
+}
+
+
+
+/* прекъсната линия под картата с филтрите */
+.filters-wrapper::after{
+  content:"";
+  display: block;
+  max-width: 100%;         
+  margin-top: 30px;
+  margin-bottom: 40px; 
+  border-top: 3px dashed silver; 
+}
+
+@media (max-width:700px){
+  .filters-wrapper::after{
+    margin-top: 30px;
+    margin-bottom: 40px; 
+  }
+}
+
+
+
+
+
+
+/* ================================
+    Карти с рецепти - под филтрите
+=================================== */
+/* външна обвивка: колкото филтрите */
+.recipes-wrap{
+  width: 80%;
+  margin-inline: auto;        /* центрира спрямо страницата */
+}
+
+/* Вътрешният грид – центриран блок, побира 6 карти + 5 разстояния */
+.recipes-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+
+  /* 6 карти × 360px + 5 междини × 18px */
+  max-width: calc(6 * 360px + 5 * 18px);
+  margin: 0 auto;                 /* центрира целия блок в wrap-а */
+
+  justify-content: center;        /* ВСЕКИ ред е центриран */
+  align-content: flex-start;      /* редовете стоят горе */
+}
+
+
+/* ================================
+   КАРТА
+=================================== */
+.recipe-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  /* фиксирана ширина → не се смалява, а се пренарежда */
+  flex: 0 0 360px;
+  width: 360px;
+
+  background:#fff;
+  border:1px solid #e9eef6;
+  border-radius:14px;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  overflow:hidden;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.recipe-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.12);
+  border-color:#cfe5d6;
+}
+
+/* вътрешна рамка за снимката */
+.recipe-image{
+  margin:12px 12px 0;
+  padding:10px;
+  border:2px solid #e6f0ff;
+  background: linear-gradient(180deg, #fff, #f7fbff);
+  border-radius:12px;
+  aspect-ratio: 16/16;
+  overflow:hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  background: #f8fafc; /* запазва светъл фон докато зарежда */
+}
+.recipe-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:10px;
+  transition: transform .25s ease;
+}
+.recipe-card:hover .recipe-image img{ transform: scale(1.02); }
+
+
+
+
+/* Бутон „Любими“ до търсачката */
+.up-fav-toggle{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 14px;
+  border: 3px solid darkorange;
+  background: linear-gradient( 180deg, gold 20%, darkorange 100%);
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+.up-fav-toggle:hover{ background: linear-gradient( 180deg, orange 10%, yellow 100%); }
+.up-fav-toggle.is-on{ border-color: #e74c3c; }
+.up-fav-toggle:disabled{ opacity: .55; cursor: not-allowed; }
+
+/* Сърцето върху картинката на картата */
+.up-fav-btn{
+  position: absolute;    /* родителят трябва да е position: relative */
+  top: 8px; right: 8px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid #dadada;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;       /* 🤍/❤️ */
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: transform .12s, box-shadow .12s, border-color .12s;
+}
+.up-fav-btn:hover{ box-shadow: 0 3px 10px rgba(0,0,0,.12); }
+.up-fav-btn:active{ transform: scale(.94); }
+.up-fav-btn.is-busy{ opacity: .6; pointer-events: none; }
+.up-fav-btn.is-on{ border-color: #e74c3c; }
+
+.up-fav-btn.is-guest{
+  opacity: .55;
+  cursor: not-allowed;
+}
+.up-fav-btn.is-guest:hover,
+.up-fav-btn.is-guest:active{
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+
+/* тяло на картата */
+.recipe-body{
+  padding:.9rem 1rem 1.1rem;
+  display:flex;
+  flex-direction:column;
+  gap:.35rem;
+}
+.recipe-title, .recipe-name{
+  margin:.4rem 0 .25rem;
+  font-size:1.1rem;
+  font-weight:800;
+  line-height:1.2;
+  color:#0b1220;
+}
+.recipe-desc{ margin:0; color:#5d6a79; }
+
+/* тагове / чипове */
+.recipe-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem;
+  margin:.45rem 0 .2rem;
+}
+.chip, .tag{
+  display:inline-block;
+  padding:.18rem .52rem;
+  font-size:.78rem;
+  font-weight:600;
+  border-radius:999px;
+  background:rgba(27,201,95,.10);
+  border:1px solid rgba(27,201,95,.25);
+  color:#0b1220;
+}
+
+/* характеристики – 2 реда × 3 колони (очаква 6 елемента) */
+.recipe-specs, .recipe-details{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:.45rem .9rem;          /* ред × колона */
+  margin-top:.7rem;
+  padding-top:.6rem;
+  border-top:2px dashed #e6f0ff;
+  font-size:.92rem;
+}
+.recipe-specs .spec, .recipe-details p{
+  margin:0;
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+  white-space:nowrap;
+}
+.recipe-specs i, .recipe-details i{
+  font-style:normal;  /* ако са emoji/иконки */
+  opacity:.75;
+}
+
+/* достъпност при фокус вътре в картата */
+.recipe-card:focus-within{
+  outline:2px solid #22c55e;
+  outline-offset:2px;
+}
+
+/* зона над бутона – лека разделителна линия */
+.recipe-actions{
+  margin-top:.75rem;
+  padding-top:.75rem;
+  border-top:2px dashed #edf2f7;
+  display:flex;
+  justify-content:flex-start;   /* бутонът вдясно; сложи center ако искаш центриран */
+}
+
+/* зелен, плътен бутон */
+.btn-view{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4rem;
+  padding:.55rem 1rem;
+  font-weight:700;
+  font-size:.92rem;
+  border-radius:10px;
+  background:linear-gradient(180deg,#22c55e,#16a34a);
+  border:1px solid #16a34a;
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 2px 6px rgba(34,197,94,.25);
+  transition:filter .15s ease, transform .05s ease, box-shadow .15s ease;
+}
+
+.btn-view:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+.btn-view:active{ transform:translateY(0); }
+.btn-view:focus-visible{
+  outline:2px solid #22c55e;
+  outline-offset:2px;
+}
+
+/* мобилно – по-добра достъпност */
+@media (max-width:520px){
+  .recipe-actions{ justify-content:center; }
+  .btn-view{ width:100%; }
+
+/* безопасен fallback за много тесни екрани – без хор. скрол */
+  .recipes-grid{ width: 100%; }
+  .recipe-card{
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+
+
+
+
+
+
+/* ------------------------------------ 
+    📱 Мобилна версия (1300px и по-малко)
+--------------------------------------- */
+
+@media (max-width:1300px){
+  /* цялата секция си остава ред под ред */
+  .filters-card {
+    padding: 20px 20px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .filters-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    justify-items: stretch;
+  }
+
+  /* 🔹 ВСИЧКИ ФИЛТРИ (БЕЗ търсачката): Label | Control на ЕДИН ред */
+  .filter-field:not(.filter-search){
+    display: grid;
+    grid-template-columns: minmax(180px, 180px) 1fr; /* label | поле */
+    align-items: center;
+    column-gap: 10px;
+    width: 100%;
+  }
+  .filter-field:not(.filter-search) label{
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .filter-field:not(.filter-search) .filter-select,
+  .filter-field:not(.filter-search) .ns,
+  .filter-field:not(.filter-search) .filter-input{
+    width: 100%;
+    min-width: 0;   /* важно, да не дърпа ширина */
+    height: 42px;
+  }
+
+  /* 🔹 Бутон „Изчисти“ – под филтрите, центриран */
+  .filter-actions{
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+  .btn-clear{ margin: 14px 0; }
+
+  /* 🔹 ТЪРСЕНЕТО: е на три центрирани реда: label → input → „Намерени“ */
+  .filter-search{
+    display: grid !important;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 8px;
+    width: 100%;
+  }
+  .filter-search label{
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+  .filter-search .search-row{ display: contents !important; }
+  .filter-search .filter-input{
+    width: min(520px, 90%);
+    height: 42px;
+    justify-self: center;
+  }
+  .filter-search .results-badge{
+    margin-left: 0%;
+    margin-top: 6px;
+  }
+
+  /*.up-fav-btn{ width: 34px; height: 34px; font-size: 16px; }*/
+}
+

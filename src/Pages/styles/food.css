@@ -1,0 +1,67 @@
+.food-page {
+  padding: 120px 20px 60px;
+  background: #f9fff9;
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+}
+
+.food-page h1 {
+  text-align: center;
+  color: forestgreen;
+  margin-bottom: 1.5rem;
+}
+
+/* === Филтри === */
+.food-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.food-select,
+.food-search {
+  padding: 10px 14px;
+  border: 2px solid limegreen;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background: white;
+}
+
+.food-search {
+  width: 260px;
+}
+
+/* === Карти с храни === */
+.food-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.food-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 128, 0, 0.25);
+}
+
+.food-card h3 {
+  color: forestgreen;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.food-card p {
+  margin: 0.35rem 0;
+  font-size: 0.95rem;
+  color: #222;
+}

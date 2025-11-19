@@ -1,0 +1,435 @@
+/* ============================
+   VitaFreshGo • Plan Details (Final Polish)
+   ============================ */
+
+/* Основна обвивка */
+.ip-wrap {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(180deg, #ebffff 20%, white 90%);
+  padding: 100px 20px;
+}
+
+.ip-card {
+  width: 85%;
+  max-width: 2500px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  padding: 40px 48px;
+  margin: 0 auto;
+}
+
+/* ---------- Горна зона ---------- */
+/* Горна карта с описание на плана */
+.ip-hero {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 40px 30px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ebffff 0%, #fff 100%);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.ip-hero .ip-category {
+  display: inline-block;
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.ip-hero .ip-title {
+  font: 800 2.3rem/1.2 "Montserrat", sans-serif;
+  color: #1f2937;
+  margin-bottom: 14px;
+}
+
+.ip-hero .ip-action {
+  font-size: 1.1rem;
+  color: #374151;
+  max-width: 900px;
+  margin: 0 auto 16px;
+}
+
+.ip-hero .ip-notes {
+  background: #ebfcff;
+  border-left: 6px solid #42a5f5;
+  padding: 14px 18px;
+  border-radius: 10px;
+  color: #0b2442;
+  font-style: italic;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Отделни карти за рецепти 
+.ip-meal-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+  padding: 38px 42px;
+  margin-bottom: 60px;
+  border-top: 6px solid #ffb74d;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.ip-meal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(255, 153, 0, 0.15);
+}
+
+
+.ip-meal-title {
+  font: 800 1.8rem/1.3 "Montserrat", sans-serif;
+  color: #1f2b44;
+  margin-bottom: 30px;
+  display: inline-block;
+  background: linear-gradient(90deg, #fff7e6, #ffe0b2);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border-left: 8px solid #ff9800;
+  box-shadow: 0 4px 10px rgba(255, 152, 0, 0.15);
+}
+
+
+.ip-meal-card + .ip-meal-card {
+  border-top: 2px dashed #ffe0b2;
+  padding-top: 50px;
+}*/
+
+
+
+
+/* ---------- Всяка рецепта ---------- */
+.ip-recipe {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 34px 38px;
+}
+
+/* Снимка + таблица */
+.ip-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+  align-items: stretch;
+}
+
+.ip-image {
+  aspect-ratio: 1 / 1;
+  max-width: 420px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
+  background: #f3f4f8;
+}
+.ip-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Таблица с данни */
+.ip-table {
+  border: 1px solid #f0f5f1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-top: 30px;
+  max-width: 520px;
+}
+
+.ip-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 18px;
+  transition: background 0.3s ease;
+}
+.ip-table .ip-row + .ip-row {
+  border-top: 1px solid #f3f3f3;
+}
+
+.ip-label {
+  font-weight: 700;
+  color: #ff8a00;
+  letter-spacing: 0.3px;
+}
+.ip-value {
+  color: #263238;
+  font-weight: 500;
+}
+
+.ip-row:hover {
+  background: linear-gradient(90deg, rgba(255, 230, 170, 0.15), rgba(255, 245, 220, 0.3));
+  transform: translateX(2px);
+}
+
+/* ---------- Секции вътре в рецепта ---------- */
+/* Accordion секции */
+.ip-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.ip-section {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.ip-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 26px;
+  font: 700 1.3rem/1 "Montserrat", sans-serif;
+  color: #1f2b44;
+  background: linear-gradient(90deg, #e0f7fa, #b3e5fc);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s ease;
+}
+
+.ip-section-header:hover {
+  background: linear-gradient(90deg, #b3e5fc, #81d4fa);
+}
+
+/* Плавно отваряне на секции */
+.ip-section-body {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.45s ease;
+}
+
+
+.ip-section.open .ip-section-body {
+  max-height: 4000px; /* достатъчно място за дълги рецепти */
+  opacity: 1;
+}
+
+/* Плавно въртене на стрелката */
+.ip-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.ip-arrow.open {
+  transform: rotate(180deg);
+}
+
+
+
+.ip-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  font: 800 1.55rem/1.3 "Montserrat", sans-serif;
+  color: #1f2b44;
+}
+
+.ip-section ul,
+.ip-section ol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.ip-section li {
+  background: linear-gradient(90deg, #f9feff 20%, #cde9ff 100%);
+  border-left: 5px solid #90caf9;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  color: #2b2f44;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+.ip-section li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Подсекции */
+.ip-section.ingredients li {
+  border-left-color: #ffe082;
+  background: linear-gradient(90deg, #fffdf3 20%, #fff3cd 100%);
+}
+.ip-section.instructions li {
+  border-left-color: #ffab91;
+  background: linear-gradient(90deg, #fff8f6 20%, #ffe0d3 100%);
+}
+.ip-section.nutrition li {
+  border-left-color: #81d4fa;
+  background: linear-gradient(90deg, #f9feff 20%, #b3e5fc 100%);
+}
+
+/* Номерирани инструкции */
+.ip-numbered {
+  counter-reset: step-counter;
+}
+.ip-numbered li {
+  position: relative;
+  counter-increment: step-counter;
+  padding-left: 50px;
+}
+.ip-numbered li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb84d, #ff7b00);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(255, 140, 0, 0.25);
+}
+
+/* Бутон назад */
+/* Бутон назад */
+.ip-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ip-btn-back {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg, yellow, orange);
+  color: #222;
+  font-weight: 600;
+  padding: 10px 40px;
+  margin-top: 50px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  overflow: hidden; /* важно, за да не излиза отблясъкът */
+  transition: all 0.25s ease;
+}
+
+/* отблясъкът */
+.ip-btn-back::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: all 0.8s ease;
+}
+
+/* hover ефект */
+.ip-btn-back:hover::after {
+  left: 125%;
+}
+
+/* стандартен hover */
+.ip-btn-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.3);
+  color: #111;
+}
+.ip-btn-back:active{ transform:translateY(1px); }
+
+.ip-btn-download-pdf {
+  background: linear-gradient(90deg, red, darkred);
+  color: white;
+  border: none;
+  padding: 10px 40px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 50px;
+}
+
+.ip-btn-download-pdf:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+
+
+/* ---------- Адаптивност ---------- */
+@media (max-width: 1100px) {
+  .ip-top {
+    grid-template-columns: 1fr;
+  }
+  .ip-image {
+    height: auto;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .ip-row {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .ip-wrap {
+    padding: 70px 5px;
+  }
+  .ip-card {
+    width: 100%;
+    padding: 26px 4px;
+  }
+  .ip-recipe {
+    padding: 20px 16px;
+  }
+  .ip-title {
+    font-size: 1.6rem;
+  }
+  .ip-meal-title {
+    font-size: 1.5rem;
+    padding: 8px 14px;
+  }
+  .ip-btn-back {
+    padding: 8px 20px;
+    font-size: 0.9 rem;
+    width: 45%;
+    height: 50px;
+    align-items: center;
+    display: center;
+  }
+  .ip-btn-download-pdf {
+    padding: 8px 20px;
+    font-size: 0.9 rem;
+    width: 45%;
+    height: 50px;
+    align-items: center;
+    display: center;
+  }
+}
+
+

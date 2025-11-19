@@ -1,0 +1,152 @@
+/* --- Overlay (фон зад модала) --- */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* --- Самият модал --- */
+.auth-modal {
+  background: black;
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  width: 360px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* --- Заглавие --- */
+.auth-modal h2 {
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #00d084, #007bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Input полета --- */
+.auth-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1rem;
+  border: 2px solid white;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.auth-input::placeholder {
+  color: #ddd;
+}
+
+.auth-input:focus {
+  border-color: #00d084;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 208, 132, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Бутоните --- */
+.auth-button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.auth-submit {
+  background: linear-gradient(135deg, #00c16a, #007bff);
+  color: white;
+}
+
+.auth-submit:hover {
+  background: linear-gradient(135deg, #00d084, #0088ff);
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(0, 208, 132, 0.4);
+}
+
+.auth-close {
+  margin-top: 0.8rem;
+  background: linear-gradient(45deg, gold, orangered);
+  color: #eee;
+}
+
+.auth-close:hover {
+  background: linear-gradient(45deg, red, darkred);
+  color: #fff;
+}
+
+/* --- Съобщения за грешка и успех --- */
+.auth-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: -0.3rem;
+  margin-bottom: 0.5rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.auth-success {
+  color: #00d084;
+  font-size: 0.9rem;
+  margin-top: -0.3rem;
+  margin-bottom: 0.5rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* --- Анимации --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+.password-field { position: relative; }
+.password-field .auth-input { padding-right: 44px; }
+
+/* бутонът за показване/скриване на паролата */
+.btn-toggle-pass {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-75%); /* вертикално центриране */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;           /* по-големи емоджита */
+  line-height: 1;
+  color: #fff;                 /* бяло на черен фон */
+  opacity: 0.9;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.btn-toggle-pass:hover {
+  opacity: 1;
+  transform: translateY(-80%) scale(1.2); /* лек zoom ефект */
+}
+.btn-toggle-pass:focus-visible { outline: 2px solid #22c55e; border-radius: 6px; }

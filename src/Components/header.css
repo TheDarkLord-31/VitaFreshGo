@@ -1,0 +1,462 @@
+/* 🌿 Главен контейнер */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Навбар с градиент и сянка */
+.navbar {
+  background: linear-gradient(180deg, lime 10%, forestgreen 95%);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar a {
+  white-space: nowrap; /* ✅ не позволява пренасяне */
+}
+
+
+.navbar .container {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  max-width: none;
+  padding: 0;
+}
+
+/* ✳️ Лого */
+.logo {
+  margin-left: 2rem;           /* премахва отстоянието отляво */
+  padding-left: 0.5rem;     /* малък визуален въздух от ръба */
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(0deg, #1100ff 20%, darkorange 95%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-family: "Montserrat", sans-serif;
+  transition: 0.3s ease;
+}
+
+
+.logo:hover {
+  color: #d4f8d4;
+  transform: scale(1.05);
+}
+
+/* 🔗 Линкове за навигация (десктоп) */
+.nav-links {
+  list-style: none;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute; 
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nav-links li a,
+.nav-links li button {
+  color: #fff;
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+/* 🌱 Подчертаване при hover */
+.nav-links li a::after,
+.nav-links li button::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #c8ffd4;
+  transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after,
+.nav-links li button:hover::after {
+  width: 100%;
+}
+
+
+/* =============== Продукти – dropdown (desktop) =============== */
+
+/* контейнерът на Продукти */
+.has-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* стрелката вдясно */
+.caret {
+  font-size: 1.5rem;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.caret.open {
+  transform: rotate(180deg);
+}
+
+/* падащото меню – точно под бутона */
+.has-dropdown .dropdown {
+  position: absolute;
+  top: calc(100% + 3.8px);           /* точно под бутона Продукти */
+  left: 50%;
+  transform: translate(-50%, -4px);
+  min-width: 160px;
+  background: forestgreen;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  display: none;
+  padding: 0; /* ✅ добавя леко място отдолу */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 1200;
+}
+
+/* показано състояние */
+.has-dropdown .dropdown.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+/* елементите вътре */
+.has-dropdown .dropdown li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* линкове вътре */
+.has-dropdown .dropdown a {
+  display: flex;
+  align-items: center;         /* вертикално центриране */
+  justify-content: center;     /* хоризонтално центриране */
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;  
+  border-bottom: 2px solid rgb(219, 255, 225, 0.25);
+  line-height: 1.4;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* без горна и долна линия за първия и последния */
+.has-dropdown .dropdown li:first-child a {
+  border-top: none;
+}
+
+.has-dropdown .dropdown li:last-child a {
+  border-bottom: none;
+  border-bottom: 1px solid rgb(255, 255, 255, 0.25);
+}
+
+
+/* hover ефект */
+.has-dropdown .dropdown a:hover {
+  background-color: #ffffff;
+  color: forestgreen;
+  font-weight: 600;
+  border-radius: 1;
+}
+
+
+
+
+
+/* === 📱 Продукти dropdown – мобилен изглед === */
+@media (max-width: 1300px) {
+  .caret {
+    font-size: 1rem;
+  }
+
+  .has-dropdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-bottom: 1px solid #32cd32;
+    position: static; /* ✅ нека бъде в нормалния поток */
+  }
+
+  .has-dropdown .nav-link-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.9rem 1rem;
+    color: #000;
+    background: #fff;
+    border: none;
+    outline: none;
+  }
+
+  /* 👇 Тук е ключът — dropdown-ът да се държи като част от менюто */
+  .has-dropdown .dropdown {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: relative;  /* 🟩 не static, за да не бута други елементи при анимация */
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    z-index: 10;
+  }
+
+  /* когато е отворен — просто се показва като нов ред */
+  .has-dropdown .dropdown.show {
+    display: flex;
+    position: relative;
+    top: 0;
+  }
+
+  /* бутоните в подменюто */
+  .has-dropdown .dropdown a {
+    display: block;
+    width: 100%;
+    padding: 1rem 1rem;
+    color: black;
+    background: #fff1d6;
+    border-top: 1px solid #32cd32;
+    text-align: center;
+    font-size: 1rem;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .has-dropdown .dropdown a:hover {
+    background: linear-gradient(180deg, lime 10%, forestgreen 95%);
+    color: ghostwhite;
+    font-weight: 600;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* 🌸 Бутон за изход */
+.logout-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+/* 🍔 Бутон за мобилно меню */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  width: 28px;
+  height: 24px;
+  margin-right: 1rem;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+
+/* Анимация на hamburger при отваряне */
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+
+
+
+
+/* -----------------------------
+   ---- 📱 Мобилна версия ------
+   ----------------------------- */
+@media (max-width: 1300px) {
+
+  .navbar { position: relative; }        /* <- ключово */
+  .navbar .container { position: static; } /* да не „краде“ позиционирането */
+
+  .menu-toggle { display: flex; }
+
+  .logo  {
+    margin-left: 1rem;
+  }
+
+  .nav-links {
+    /* СКРИТО по дефолт – няма как да “примига” */
+    display: none;
+
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    width: 100vw;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0; padding: 0;
+
+    /* еднаква ос за скриване/показване (не mix X/Y) */
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+
+    box-sizing: border-box;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+
+  .nav-links.open {
+    display: flex;               /* показваме САМО тогава */
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 2px 10px 2px silver;
+  }
+
+  .nav-links li {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid lime;
+  }
+
+  .nav-links li:nth-child(odd),
+  .nav-links li:nth-child(even) {
+    background-color: white;
+  }
+
+  .nav-links li a,
+  .nav-links li button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    gap: 12px;
+    width: 100%;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    padding: 0.8rem 1rem;
+    font-family: "Montserrat", sans-serif;
+  }
+
+    /* махаме underline-анимацията, за да няма втора линия */
+    .nav-links li a::after,
+    .nav-links li button::after {
+      content: none !important;
+    }
+
+    /* държим стабилен зелен делител – еднакъв в hover и normal */
+    .nav-links li,
+    .nav-links li:hover {
+      border-bottom: 1px solid #32cd32;
+      background: #fff; /* фонът стои на <li> бял и неподвижен */
+    }
+
+    /* оцветяваме само самия линк при hover – делителят не мърда */
+    .nav-links li a,
+    .nav-links li button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      color: #000;
+      padding: 0.9rem 1rem;
+      background: transparent;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li button:hover {
+      background: #eaffea;     /* няма да влияе на зелената линия */
+    }
+
+
+  .logout-btn {
+    color: #ff0000 !important;
+  }
+
+  .logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+
+
+
+
+/* ===== 🖥️ ДЕСКТОП (1200px и нагоре) ===== */
+@media (min-width: 1301px) {
+
+  .nav-links {
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .nav-links li a,
+  .nav-links li button {
+    display: inline-flex;
+    align-items: center !important;
+    gap: 0.3rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 1301px) and (max-width: 1700px) {
+  .nav-links {
+    gap: 2rem;
+    align-items: center; /* ок, ако .nav-links е display:flex */
+  }
+}
+
+@media (min-width: 1301px) and (max-width: 1500px) {
+  .nav-links {
+    left: calc(65% - clamp(0px, (1500px - 100vw) / 2, 80px));
+  }
+}
